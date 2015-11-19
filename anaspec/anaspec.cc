@@ -85,7 +85,9 @@ double anaspec::ask(double E, double mdm, bool cumulate) {
          realx;
   double upbound = newformat[product][0] ? 0.999999 : 0.9772;
 
-  for (int i = 0; i < branch_choice_size; i++)
+  for (int i = 0; i < branch_choice_size; i++) {
+    printDebugMsg("Routine", "calculating branch %d with sum %f", i, sum);
+
     if (exist[product][i] && branch[i]) {
       if (!loaded[product][i]) load(product, (anaspec::branch_choice)i);
       if (cumulate && withcum[product][i] && E / mdm > 1e-5) {
@@ -94,6 +96,8 @@ double anaspec::ask(double E, double mdm, bool cumulate) {
       } else if(E / mdm > 1e-5 && E / mdm < upbound)
         sum += branch[i] * table[product][i].lnask(E / mdm, mdm) / mdm;
     }
+
+  }
 
   printDebugMsg("Routine", "<<ask: %f", sum);
   return sum;
