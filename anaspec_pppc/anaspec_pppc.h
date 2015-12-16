@@ -27,6 +27,7 @@ public:
   anaspec_pppc(const std::vector <double> &branch_, anaspec::product_choice product_);
 
   double ask(double E, double mdm, bool cumulate = false);
+  double pppc_ask(double E, double mdm, pppc::pppc_product prod, bool cumulate = false);
 
 private:
   static const bool exist[product_choice_size][branch_choice_size];
@@ -35,7 +36,6 @@ private:
   std::vector <bool> loaded;
   double low_x;
 
-  double pppc_ask(double E, double mdm, pppc::pppc_product prod, bool cumulate);
   int load(anaspec::product_choice prod);
   int load(pppc::pppc_product prod);
   int add_threshold_mass(Table2D *tab) const;
