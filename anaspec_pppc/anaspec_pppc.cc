@@ -18,6 +18,7 @@ pppc::pppc_branch branch_map[] = {
   pppc::W_boson,
   pppc::quark, //The quark channel of PPPC denotes a light quark
   pppc::charm, pppc::bottom, pppc::top,
+  pppc::gluon,
   pppc::four_e, pppc::four_mu, pppc::four_tau
 };
 

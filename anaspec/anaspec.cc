@@ -14,7 +14,7 @@ using std::cout;
 using std::endl;
 
 const string anaspec::prodname[product_choice_size] = { "posi", "pbar", "gamma", "nu", "deuterons" },
-    anaspec::braname[branch_choice_size] = { "e", "mu", "tau", "ww", "uu", "cc", "bb", "tt", "foure", "fourmu", "fourtau" };
+    anaspec::braname[branch_choice_size] = { "e", "mu", "tau", "ww", "uu", "cc", "bb", "tt", "gg", "foure", "fourmu", "fourtau" };
 
 #define NAME(TYPE) ENUMNAMECLS(TYPE, anaspec)
 #define X(a) #a,
@@ -31,21 +31,21 @@ NAME(branch_choice) = {
 X(product_choice) X(branch_choice)
 #undef X
 
-const bool anaspec::newformat[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} },
-      anaspec::exist[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                               {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} },
-      anaspec::withcum[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                 {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                 {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                 {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0},
-                                                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
+const bool anaspec::newformat[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} },
+      anaspec::exist[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                               {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} },
+      anaspec::withcum[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                 {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                 {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                 {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
 
 #define BRANCHING\
   for (int i = 0; i < branch_choice_size; i++) branch[i] = branch_[i]
