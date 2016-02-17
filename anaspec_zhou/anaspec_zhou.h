@@ -32,8 +32,8 @@ class anaspec_zhou : public anaspec {
     TGraph *tg[zhou::zhou_product_size][zhou::zhou_branch_size];
     static const bool exist[product_choice_size][branch_choice_size];
     bool loaded[product_choice_size][branch_choice_size];
-    static const double eMass = 0.5109990615e-3; //Electron mass in Gev
-    static const double pMass = 939.e-3; //Proton mass in Gev
+    static const double eMass; //Electron mass in Gev
+    static const double pMass; //Proton mass in Gev
 
     bool load(zhou::zhou_product prod, zhou::zhou_branch bran);
     double zhou_ask(double E, double mdm, zhou::zhou_product prod, zhou::zhou_branch bran);
