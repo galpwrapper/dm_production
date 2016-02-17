@@ -6,11 +6,9 @@
 #include"enum_utils.h"
 
 /*********************************************************************
-This class is used to calculate generation spectrum from the annihilation
-of darkmatter
-E and mdm are both in [GeV], the result returned by function ask is in [GeV^-1].
-The 'E' referred here is Ekin in fact.
-
+This class is used to calculate generation spectrum from the
+annihilation of darkmatter Eg and mdm are both in [GeV], the result
+returned by function ask is in [GeV^-1].
 Modified from anaspec.f(yuan)    linsj20140308
 The cumulated mode will return the value of \int_0^{E_0} dN/dE dE
 *********************************************************************/
