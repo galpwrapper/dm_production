@@ -34,8 +34,8 @@ const bool anaspec_zhou::exist[product_choice_size][branch_choice_size] = {{1,1,
                                                                            {0,0,0,0,0,0,0,0,0,0,0,0}
 };
 
-const double eMass = 0.5109990615e-3;
-const double pMass = 939.e-3;
+const double anaspec_zhou::eMass = 0.5109990615e-3;
+const double anaspec_zhou::pMass = 939.e-3;
 
 anaspec_zhou::anaspec_zhou(): anaspec() {
   memset(tg, NULL, sizeof(tg));
