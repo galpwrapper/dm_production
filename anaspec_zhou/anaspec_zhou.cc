@@ -1,3 +1,5 @@
+#ifndef NO_ROOT
+
 #include <iostream>
 #include <cstring>
 #include "TFile.h"
@@ -108,3 +110,5 @@ double anaspec_zhou::zhou_ask(double E, double mdm, zhou::zhou_product prod, zho
     return 0;
   }
 }
+
+#endif

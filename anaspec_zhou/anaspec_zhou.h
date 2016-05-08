@@ -1,5 +1,8 @@
 #ifndef _ANASPEC_zhou_H
 #define _ANASPEC_zhou_H
+
+#ifndef NO_ROOT
+
 #include "anaspec.h"
 #include "TGraph.h"
 
@@ -38,4 +41,7 @@ class anaspec_zhou : public anaspec {
     bool load(zhou::zhou_product prod, zhou::zhou_branch bran);
     double zhou_ask(double E, double mdm, zhou::zhou_product prod, zhou::zhou_branch bran);
 };
+
+#endif // NO_ROOT
+
 #endif
