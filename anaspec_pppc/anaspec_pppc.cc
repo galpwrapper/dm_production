@@ -11,6 +11,7 @@ using std::ifstream;
 using std::log10;
 using std::vector;
 using std::cout;
+using std::cerr;
 using std::endl;
 
 pppc::pppc_branch branch_map[] = {
@@ -67,7 +68,7 @@ int anaspec_pppc::load(pppc::pppc_product prod) {
 #endif
   filename += "/AtProduction_" + pppc::product_file[prod] +  ".dat";
   printDebugMsg("Routine", ">>load: filename = %s", filename.c_str());
-  cout << "loading PPPC file " << filename << endl;
+  cerr << "loading PPPC file " << filename << endl;
   ifstream dats(filename.c_str());
 
   string line;
