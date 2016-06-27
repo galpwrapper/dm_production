@@ -30,9 +30,9 @@ public:
   double pppc_ask(double E, double mdm, pppc::pppc_product prod, bool cumulate = false);
 
 private:
-  static const bool exist[product_choice_size][branch_choice_size];
-  Interp2D table[product_choice_size][branch_choice_size],
-           cumutable[product_choice_size][branch_choice_size];
+  //static const bool exist[product_choice_size][branch_choice_size];
+  Interp2D table[pppc::pppc_product_size][pppc::pppc_branch_size],
+           cumutable[pppc::pppc_product_size][pppc::pppc_branch_size];
   std::vector <bool> loaded;
   double low_x;
 

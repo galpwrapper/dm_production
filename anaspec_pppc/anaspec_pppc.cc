@@ -79,6 +79,7 @@ int anaspec_pppc::load(pppc::pppc_product prod) {
   int mind = -1, xind = -1;
   double Nx[pppc::pppc_branch_size],
          mold = 0, mnew, xnew, val; // xold = 0
+  printDebugMsg("Routine", "Go to getlines");
   while (getline(dats, line)) {
     istringstream iss(line);
     iss >> mnew; iss >> xnew;
@@ -108,12 +109,14 @@ int anaspec_pppc::load(pppc::pppc_product prod) {
   add_threshold_mass(tab);
 
   for (unsigned i_branch = 0; i_branch < pppc::pppc_branch_size; i_branch++) {
+    printDebugMsg("Routine", "Init branch %d %d %d", i_branch, prod, anaspec::deuterons);
     table[prod][i_branch].tabling(tab[i_branch]);
     cumutable[prod][i_branch].tabling(cumtab[i_branch]);
   }
 
   low_x = (tab[0].xaxis.begin())->first / 2;
 
+  printDebugMsg("Routine", "<<load");
   return 0;
 }
 
@@ -126,6 +129,7 @@ int anaspec_pppc::load(anaspec::product_choice prod) {
 }
 
 int anaspec_pppc::add_threshold_mass(Table2D *tab) const {
+  printDebugMsg("Routine", ">>add_threshold_mass");
   const vector <double> threshold_mass = { 0, 0, 0, 0, 0, 0, 0, 0, 0, //e, mu, tau
     0, 0, 0, //quark, charm, bottom; We set those mass smaller than 5GeV to be zero, and do nothing to these branch
     173.07, 80.4, 80.4, 80.4, 91.2, 91.2, 91.2, //t, W, Z
@@ -140,5 +144,6 @@ int anaspec_pppc::add_threshold_mass(Table2D *tab) const {
     }
   }
 
+  printDebugMsg("Routine", ">>add_threshold_mass");
   return 0;
 }
