@@ -31,21 +31,17 @@ NAME(branch_choice) = {
 X(product_choice) X(branch_choice)
 #undef X
 
-const bool anaspec::newformat[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                        {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                        {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0} },
-      anaspec::exist[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                               {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                               {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0} },
-      anaspec::withcum[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                 {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                 {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                 {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
+const bool
+anaspec::exist[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                            {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                            {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                            {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                            {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0} },
+anaspec::withcum[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                              {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                              {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                              {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
+                                                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
 
 #define BRANCHING\
   for (int i = 0; i < branch_choice_size; i++) branch[i] = branch_[i]
@@ -83,7 +79,7 @@ double anaspec::ask(double E, double mdm, bool cumulate) {
   printDebugMsg("Routine", ">>ask: E, m_dm, cumulate = %f, %f, %d", E, mdm, cumulate);
   double sum = 0,
          realx;
-  double upbound = newformat[product][0] ? 0.999999 : 0.9772;
+  double upbound = 0.999999;
 
   for (int i = 0; i < branch_choice_size; i++) {
     printDebugMsg("Routine", "calculating branch %d with sum %f", i, sum);
@@ -122,25 +118,21 @@ int anaspec::load(anaspec::product_choice prod, anaspec::branch_choice branch, b
 
   const double mfactor = 2;
   Table2D tab;
-  string line;
+  string line, notate;
   double x, y, val;
   vector <double> yaxis;
 
-  if(newformat[prod][branch]) {
-    getline(dats, line);
-    istringstream iss(line);
-    while(iss >> y) yaxis.push_back(y);
-  }
+  getline(dats, line);
+  istringstream iss(line);
+  iss >> notate;
+  while(iss >> y) yaxis.push_back(y);
 
   while (getline(dats, line)) {
     istringstream iss(line);
     iss >> x;
     x *= log(10);
 
-    if(newformat[prod][branch])
-      for(unsigned i = 0; (iss >> val) && i < yaxis.size(); i++) tab.insval(x, yaxis[i] * log(10), val * log(10));
-    else
-      for (y = 1; iss >> val; y += log10(mfactor)) tab.insval(x, y * log(10), val * log(10)); //times log(10) to change the base from 10 to e
+    for(unsigned i = 0; (iss >> val) && i < yaxis.size(); i++) tab.insval(x, yaxis[i] * log(10), val * log(10));
   }
 
   cumulate ? cumutable[prod][branch].lntabling(tab) : table[prod][branch].lntabling(tab);

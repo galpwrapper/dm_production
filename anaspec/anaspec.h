@@ -45,8 +45,7 @@ protected:
 private:
   static const std::string prodname[product_choice_size], braname[branch_choice_size];
   static const bool exist[product_choice_size][branch_choice_size],
-               withcum[product_choice_size][branch_choice_size],
-               newformat[product_choice_size][branch_choice_size];
+               withcum[product_choice_size][branch_choice_size];
 
   Interp2D table[product_choice_size][branch_choice_size],
            cumutable[product_choice_size][branch_choice_size];
