@@ -20,7 +20,8 @@ pppc::pppc_branch branch_map[] = {
   pppc::quark, //The quark channel of PPPC denotes a light quark
   pppc::charm, pppc::bottom, pppc::top,
   pppc::gluon,
-  pppc::four_e, pppc::four_mu, pppc::four_tau
+  pppc::four_e, pppc::four_mu, pppc::four_tau,
+  pppc::pppc_branch_size, // for four_pi channel, set all the result to zero
 };
 
 const vector <vector <pppc::pppc_product> > product_map = { {pppc::positrons}, {pppc::antiprotons}, {pppc::gammas}, {pppc::neutrinos_e, pppc::neutrinos_mu, pppc::neutrinos_tau}, {pppc::antideuterons} };
@@ -49,7 +50,7 @@ double anaspec_pppc::pppc_ask(double E, double mdm, pppc::pppc_product prod, boo
   printDebugMsg("Routine", ">>pppc_ask: E, m_dm, cumulate = %f, %f, %d, %d", E, mdm, prod, cumulate);
   double result = 0, x = E/mdm, realx;
   for (unsigned i = 0; i < branch_choice_size; i++)
-    if(branch[i]) {
+    if(branch[i] && branch_map[i] < pppc::pppc_branch_size) {
       if(cumulate && x > low_x) {
         realx = x > 1 ? 1 : x;
         result += branch[i] * cumutable[prod][branch_map[i]].lnask(realx, mdm);

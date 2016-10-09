@@ -13,9 +13,6 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-const string anaspec::prodname[product_choice_size] = { "posi", "pbar", "gamma", "nu", "deuterons" },
-    anaspec::braname[branch_choice_size] = { "e", "mu", "tau", "ww", "uu", "cc", "bb", "tt", "gg", "foure", "fourmu", "fourtau" };
-
 #define NAME(TYPE) ENUMNAMECLS(TYPE, anaspec)
 #define X(a) #a,
 NAME(product_choice) = {
@@ -32,16 +29,16 @@ X(product_choice) X(branch_choice)
 #undef X
 
 const bool
-anaspec::exist[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                            {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                            {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                            {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                            {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0} },
-anaspec::withcum[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                              {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                              {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                              {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0},
-                                                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
+anaspec::exist[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1},
+                                                            {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+                                                            {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+                                                            {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+                                                            {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0} },
+anaspec::withcum[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1},
+                                                              {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+                                                              {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+                                                              {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0},
+                                                              {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
 
 #define BRANCHING\
   for (int i = 0; i < branch_choice_size; i++) branch[i] = branch_[i]
@@ -112,11 +109,10 @@ int anaspec::load(anaspec::product_choice prod, anaspec::branch_choice branch, b
 #else
   string filename = ".";
 #endif
-  filename += "/" + prodname[prod] + "_" + braname[branch] + (cumulate ? "_cum" : "" ) + ".dat";
+  filename = filename + "/" + enum2str(prod) + "_" + enum2str(branch) + (cumulate ? "_cum" : "" ) + ".dat";
   printDebugMsg("Routine", ">>load: filename = %s", filename.c_str());
   ifstream dats(filename.c_str());
 
-  const double mfactor = 2;
   Table2D tab;
   string line, notate;
   double x, y, val;

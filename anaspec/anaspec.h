@@ -43,7 +43,6 @@ protected:
   double branch[branch_choice_size];
 
 private:
-  static const std::string prodname[product_choice_size], braname[branch_choice_size];
   static const bool exist[product_choice_size][branch_choice_size],
                withcum[product_choice_size][branch_choice_size];
 
