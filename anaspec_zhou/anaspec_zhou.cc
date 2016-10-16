@@ -29,11 +29,11 @@ namespace zhou {
   };
 }
 
-const bool anaspec_zhou::exist[product_choice_size][branch_choice_size] = {{1,1,1,1,0,0,1,0,0,1,1,1},
-                                                                           {0,1,0,1,1,0,1,1,0,0,0,0},
-                                                                           {0,0,0,0,0,0,0,0,0,0,0,0},
-                                                                           {0,0,0,0,0,0,0,0,0,0,0,0},
-                                                                           {0,0,0,0,0,0,0,0,0,0,0,0}
+const bool anaspec_zhou::exist[product_choice_size][branch_choice_size] = {{1,1,1,1,0,0,1,0,0,1,1,1,0,0},
+                                                                           {0,1,0,1,1,0,1,1,0,0,0,0,0,0},
+                                                                           {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                                           {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                                                                           {0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
 
 const double anaspec_zhou::eMass = 0.5109990615e-3;

@@ -14,14 +14,14 @@ using std::cout;
 using std::cerr;
 using std::endl;
 
-pppc::pppc_branch branch_map[] = {
+pppc::pppc_branch branch_map[anaspec::branch_choice_size] = {
   pppc::ele, pppc::mu, pppc::tau,
   pppc::W_boson,
   pppc::quark, //The quark channel of PPPC denotes a light quark
   pppc::charm, pppc::bottom, pppc::top,
   pppc::gluon,
   pppc::four_e, pppc::four_mu, pppc::four_tau,
-  pppc::pppc_branch_size, // for four_pi channel, set all the result to zero
+  pppc::pppc_branch_size, pppc::pppc_branch_size // for four_pi or four_pi0 channel, set all the result to zero
 };
 
 const vector <vector <pppc::pppc_product> > product_map = { {pppc::positrons}, {pppc::antiprotons}, {pppc::gammas}, {pppc::neutrinos_e, pppc::neutrinos_mu, pppc::neutrinos_tau}, {pppc::antideuterons} };
