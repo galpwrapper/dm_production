@@ -33,12 +33,33 @@ anaspec::exist[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1
                                                             {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
                                                             {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1},
                                                             {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-                                                            {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0} },
+                                                            {0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0} },
 anaspec::withcum[product_choice_size][branch_choice_size] = { {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0},
                                                               {0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1},
                                                               {1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0},
                                                               {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
+
+vector<double> anaspec::define_mass() {
+  vector<double> m(branch_choice_size);
+  m[electron] = 0.511e-3;
+  m[mu] = 105.7e-3;
+  m[tau] = 1.777;
+  m[W] = 80.4;
+  m[up] = 2.3e-3;
+  m[charm] = 1.275;
+  m[bottom] = 4.18;
+  m[top] = 173.07;
+  m[gluon] = 0;
+  m[four_e] = mass[electron] * 2;
+  m[four_mu] = mass[mu] * 2;
+  m[four_tau] = mass[tau] * 2;
+  m[four_pi] = 139.57e-3 * 2;
+  m[four_pi0] = 134.98e-3 * 2;
+
+  return m;
+}
+const vector<double> anaspec::mass = anaspec::define_mass();
 
 #define BRANCHING\
   for (int i = 0; i < branch_choice_size; i++) branch[i] = branch_[i]
@@ -81,7 +102,7 @@ double anaspec::ask(double E, double mdm, bool cumulate) {
   for (int i = 0; i < branch_choice_size; i++) {
     printDebugMsg("Routine", "calculating branch %d with sum %f", i, sum);
 
-    if (exist[product][i] && branch[i]) {
+    if (exist[product][i] && branch[i] && mdm >= mass[i]) {
       if (!loaded[product][i]) load(product, (anaspec::branch_choice)i);
       if (cumulate && withcum[product][i] && E / mdm > 1e-5) {
         realx = (E / mdm) > 1 ? 1 : (E / mdm);
