@@ -33,7 +33,7 @@ public:
   anaspec(const std::vector <double> &branch_, anaspec::product_choice product_);
 
   static unsigned getenum(const std::string &enum_name);
-  int rebranch(double *branch_);
+  int rebranch(const double *branch_);
   int rebranch(const std::vector <double> &branch_);
   int choose(anaspec::product_choice product_);
   virtual double ask(double E, double mdm, bool cumulate = false);
@@ -54,9 +54,5 @@ private:
   int load(anaspec::product_choice prod, anaspec::branch_choice bra, bool cumutable);
   static std::vector<double> define_mass();
 };
-
-#define X(TYPE) ENUMDECLEAR(anaspec::TYPE)
-X(product_choice) X(branch_choice)
-#undef X
 
 #endif // for #ifndef _ANASPEC_H

@@ -24,7 +24,7 @@ NAME(branch_choice) = {
 #undef X
 #undef NAME
 
-#define X(TYPE) ENUMANDSTR(anaspec::TYPE, anaspec::TYPE##_name)
+#define X(TYPE) ENUMANDSTR(anaspec::TYPE)
 X(product_choice) X(branch_choice)
 #undef X
 
@@ -80,7 +80,7 @@ anaspec::anaspec(const vector <double> &branch_, anaspec::product_choice product
   INILOADED;
 }
 
-int anaspec::rebranch(double *branch_) {
+int anaspec::rebranch(const double *branch_) {
   BRANCHING;
   return 0;
 }
